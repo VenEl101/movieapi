@@ -1,0 +1,31 @@
+version: "27.2.0"
+
+services:
+  app:
+    container_name: netflix-app
+    build: .
+  
+  depends_on:
+    -db
+
+  environment:
+      -POSTGRES_HOST=db
+      -POSTGRES_DB=postgres
+    
+  volumes:
+    - .:code
+
+  ports:
+    -8000:8000
+
+  db:
+    image: postgres:16.3
+    environment:
+      -POSTGRES_DB=postgres
+      -POSTGRES_USER=postgres
+      -POSTGRES_PASSWORD=postgres
+    
+    ports:
+      -5432:5432
+    volumes:
+      -./data/db:/var/lib/postgressql/data
