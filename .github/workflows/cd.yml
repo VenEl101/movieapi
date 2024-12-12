@@ -23,15 +23,15 @@ jobs:
 
 
     steps:
-      -uses: action/checkout@v2
-      -uses: actions/setup-python@v2
-      with:
-        python-version: 3.12.4
+      - uses: action/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.12.4
 
-      -name: install Requirments
-      run: pip install -r requirements.txt
-      -name: Run Tests
-      run: pytest
+      - name: install Requirments
+        run: pip install -r requirements.txt
+      - name: Run Tests
+        run: pytest
   
   deploy:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
     needs: test
     steps:
       - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1.2.0
+      - uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.HOST }}
           username: linuxserver.io
